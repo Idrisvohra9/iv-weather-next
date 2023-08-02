@@ -21,6 +21,7 @@ body {
   background: linear-gradient(to bottom,
       transparent,
       rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  overflow-x: hidden;
 }
 
 .cardContainer {
@@ -38,6 +39,8 @@ body {
   justify-content: space-between;
   padding: 20px;
   border-radius: 10px;
+  min-width: fit-content;
+  min-width: 75vw;
   backdrop-filter: blur(30px);
   background-color: rgba(65, 65, 65, 0.308);
   border: 1px solid rgba(255, 255, 255, 0.089);
@@ -298,9 +301,10 @@ h1 {
   font-family: sans-serif;
 }
 
-.container-warning::before, .container-warning::after {
+.container-warning::before,
+.container-warning::after {
   content: "";
-  background-color: #cec2b74c;
+  background-color: rgba(192, 192, 192, 0.677);
   position: absolute;
 }
 
@@ -317,13 +321,13 @@ h1 {
   position: absolute;
   height: 40%;
   top: 8%;
-  right: 5%;
+  right: 3%;
   border: 1px solid;
 }
 
 .container-warning .box {
-  /* width: 11.875em; */
-  /* height: 15.875em; */
+  max-width: 40rem;
+  min-width: fit-content;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.074);
   border: 1px solid rgba(255, 255, 255, 0.222);
@@ -348,11 +352,6 @@ h1 {
 .container-warning .box div strong {
   display: block;
   margin-bottom: .5rem;
-}
-
-.container-warning .box div img {
-  mix-blend-mode: multiply;
-  background-color: transparent;
 }
 
 .container-warning .box div span {

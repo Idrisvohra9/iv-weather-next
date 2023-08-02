@@ -93,6 +93,7 @@ export const getLocation = async (cityName: string) => {
   const response = await fetch(url);
   const data = await response.json();
   const firstResult = data.results[0];
+  console.log("in Get location")
   console.log(firstResult);
   return {
     country_name: firstResult.components.country,
