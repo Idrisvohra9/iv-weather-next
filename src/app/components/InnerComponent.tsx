@@ -20,7 +20,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ city, state, currentTime, date, subText, main, weather, country_name }) => {
-  if (!country_name) {
+  if (!country_name || !city) {
     return <h1>
       Sorry, The location could not be found, the reason could be untraceable ip address. Or a request for a location that does not exist.
     </h1>

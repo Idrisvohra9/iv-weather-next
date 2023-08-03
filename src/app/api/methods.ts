@@ -40,6 +40,7 @@ export const getLocalTimeData = () => {
     subText: amPm,
   };
 };
+
 export async function getTimeFromCity(country: string, city: string) {
   try {
     console.log(encodeURIComponent(country));
@@ -82,6 +83,7 @@ export const getCurrentLocation = async () => {
     `https://geolocation-db.com/json/${process.env.NEXT_PUBLIC_GEO_KEY}`
   );
   const data = await response.json();
+  // console.log(data)
   return {
     city: data.city,
     state: data.state,
@@ -93,8 +95,8 @@ export const getLocation = async (cityName: string) => {
   const response = await fetch(url);
   const data = await response.json();
   const firstResult = data.results[0];
-  console.log("in Get location")
-  console.log(firstResult);
+  // console.log("in Get location");
+  // console.log(firstResult);
   return {
     country_name: firstResult.components.country,
     state: firstResult.components.state,
@@ -136,6 +138,7 @@ export async function getWeatherWarning(state: string, warning: string) {
       console.error("Error fetching flood warnings:", error);
     });
 }
+
 export const getWeatherData = async (address: string) => {
   try {
     const response = await fetch(
@@ -143,6 +146,7 @@ export const getWeatherData = async (address: string) => {
     );
     if (!response.ok) throw new Error();
     const { main, weather } = await response.json();
+    // console.log(main, weather);
     return { main, weather };
   } catch (error) {}
 };
