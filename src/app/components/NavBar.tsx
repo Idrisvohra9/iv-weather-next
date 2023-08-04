@@ -34,7 +34,7 @@ export default function NavBar() {
 
                   Menu open: "hidden", Menu closed: "block"
                 */}
-                            <svg className="block h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
+                            <svg className="block h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="white" aria-hidden="true">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                             </svg>
                             {/* {/*
@@ -53,7 +53,7 @@ export default function NavBar() {
                         </div>
                         <div className="hidden sm:ml-6 sm:block">
                             <div className="flex space-x-4">
-                                <Link href="/" className="text-gray-100 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium flex" aria-current="page">Dashboard
+                                <Link href="/" className="text-gray-100 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Dashboard
                                 </Link>
                                 <Menu as="div" className="relative ml-3">
                                     <div>
@@ -145,14 +145,14 @@ export default function NavBar() {
             {/* {/* Mobile menu, show/hide based on menu state. */}
             <div className="sm:hidden" id="mobile-menu">
                 <div className="space-y-1 px-2 pb-3 pt-2 nav-main">
-                    <Link href="/" className="bg-gray-700 text-white rounded-md px-3 py-2 text-sm font-medium flex" aria-current="page">Dashboard
+                    <Link href="/" className="text-gray-100 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium ml-3" aria-current="page">Dashboard
                     </Link>
                     <Menu as="div" className="relative ml-3">
                         <div>
                             <Menu.Button className="text-gray-100 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium flex">
                                 <span className="sr-only">Open Locations Dropdown</span>
                                 Locations
-                                <svg className="-mr-1 h-5 w-5 text-gray-100" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <svg className="ml-1 h-5 w-5 text-gray-100" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                     <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
                                 </svg>
                             </Menu.Button>
@@ -195,7 +195,7 @@ export default function NavBar() {
                             <Menu.Button className="text-gray-100 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium flex">
                                 <span className="sr-only">Open Warnings Dropdown</span>
                                 Warnings
-                                <svg className="-mr-1 h-5 w-5 text-gray-100" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <svg className="ml-1 h-5 w-5 text-gray-100" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                     <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
                                 </svg>
                             </Menu.Button>

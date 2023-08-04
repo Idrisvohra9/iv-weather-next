@@ -5,9 +5,7 @@ import { getLocalTimeData, getCurrentLocation, getWeatherData } from "./api/meth
 export default async function Page() {
   const currentLocation = await getCurrentLocation();
   console.log(currentLocation)
-  // console.log(currentLocation)
   const weatherData = await getWeatherData(currentLocation.city);
-  // console.log(weatherData)
   const data = {
     ...getLocalTimeData(),
     ...currentLocation,

@@ -1,81 +1,21 @@
-// import { getGeolocation } from 'node-geolocation';
+import { DateTime } from "luxon";
 export const getLocalTimeData = () => {
-  const now = new Date();
-  let hours = now.getHours();
-  const minutes = String(now.getMinutes()).padStart(2, "0");
-  const daysOfWeek = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  const amPm = hours >= 12 ? "PM" : "AM";
-
-  // // Convert to 12-hour format
-  // hours = hours % 12;
-  // hours = hours || 12; // If hours is 0, make it 12
-
-  const dayOfWeek = daysOfWeek[now.getDay()];
-  const month = months[now.getMonth()];
-  const date = now.getDate();
+  const now = DateTime.now();
   return {
-    currentTime: `${hours}:${minutes}`,
-    date: `${dayOfWeek}, ${month} ${date}`,
-    subText: amPm,
+    currentTime: now.toLocaleString(DateTime.TIME_24_SIMPLE),
+    date: now.toFormat("MMMM dd, yyyy"),
+    subText: now.toFormat("a"),
   };
 };
 
-export async function getTimeFromCity(country: string, city: string) {
-  try {
-    console.log(encodeURIComponent(country));
-    // Fetch time data from TimezoneDB API
-    const timezoneResponse = await fetch(
-      `http://api.timezonedb.com/v2.1/get-time-zone?key=${
-        process.env.NEXT_PUBLIC_TIMZEONE_KEY
-      }&format=json&by=zone&zone=${country}/${encodeURIComponent(city)}`
-    );
-    if (!timezoneResponse.ok) {
-      throw new Error("Failed to fetch time data");
-    }
-    const data = await timezoneResponse.json();
-    console.log(data);
-    const currentTime = new Date(data.formatted);
-    const timeString = currentTime.toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-    const dateString = currentTime.toLocaleDateString([], {
-      weekday: "long",
-      month: "long",
-      day: "numeric",
-    });
-
-    return {
-      currentTime: timeString,
-      date: dateString,
-      subText: currentTime.getHours() >= 12 ? "PM" : "AM",
-    };
-  } catch (error) {
-    console.error("Error fetching data:");
-    return null;
-  }
+export function getTimeFromTimeZone(timezone: string) {
+  // console.log(timezone);
+  const now = DateTime.local().setZone(timezone);
+  return {
+    currentTime: now.toLocaleString(DateTime.TIME_24_SIMPLE),
+    date: now.toFormat("MMMM dd, yyyy"),
+    subText: now.toFormat("a"),
+  };
 }
 
 // export async function get
@@ -83,7 +23,7 @@ export const getCurrentLocation = async () => {
   const response = await fetch(
     `https://geolocation-db.com/json/${process.env.NEXT_PUBLIC_GEO_KEY}`,
     {
-      method: 'GET',
+      method: "GET",
     }
   );
   // console.log(process.env.NEXT_PUBLIC_GEO_KEY)
@@ -95,31 +35,6 @@ export const getCurrentLocation = async () => {
     country_name: data.country_name,
   };
 };
-
-// export async function getGeolocationData() {
-//   try {
-//     // 10th try doing it with ip 
-//     const response = await fetch('https://api.ipify.org?format=json');
-//     const data = await response.json();
-//     console.log(data);
-//     const locationResponse = await fetch(`https://ipapi.co/${data.ip}/json/`);
-//     const locationData = await locationResponse.json();
-//     return {}
-//   } catch (error) {
-//     console.error('Error fetching IP address:', error);
-//     throw error;
-//   }
-// }
-
-// Usage
-// getGeolocationData()
-//   .then((geolocationData) => {
-//     console.log("Geolocation data:", geolocationData);
-//   })
-//   .catch((error) => {
-//     console.error("Error:", error);
-//   });
-
 export const getLocation = async (cityName: string) => {
   const url = `https://api.opencagedata.com/geocode/v1/json?q=${cityName}&key=${process.env.NEXT_PUBLIC_OPENCAGE_KEY}`;
   const response = await fetch(url);
@@ -128,6 +43,7 @@ export const getLocation = async (cityName: string) => {
   return {
     country_name: firstResult.components.country,
     state: firstResult.components.state,
+    timezone: firstResult.annotations.timezone
   };
 };
 
