@@ -53,7 +53,7 @@ export default function NavBar() {
                         </div>
                         <div className="hidden sm:ml-6 sm:block">
                             <div className="flex space-x-4">
-                                <Link href="/" className="bg-gray-700 text-white rounded-md px-3 py-2 text-sm font-medium flex" aria-current="page">Dashboard
+                                <Link href="/" className="text-gray-100 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium flex" aria-current="page">Dashboard
                                 </Link>
                                 <Menu as="div" className="relative ml-3">
                                     <div>

@@ -1,3 +1,4 @@
+// import { getGeolocation } from 'node-geolocation';
 export const getLocalTimeData = () => {
   const now = new Date();
   let hours = now.getHours();
@@ -27,9 +28,9 @@ export const getLocalTimeData = () => {
   ];
   const amPm = hours >= 12 ? "PM" : "AM";
 
-  // Convert to 12-hour format
-  hours = hours % 12;
-  hours = hours || 12; // If hours is 0, make it 12
+  // // Convert to 12-hour format
+  // hours = hours % 12;
+  // hours = hours || 12; // If hours is 0, make it 12
 
   const dayOfWeek = daysOfWeek[now.getDay()];
   const month = months[now.getMonth()];
@@ -80,8 +81,12 @@ export async function getTimeFromCity(country: string, city: string) {
 // export async function get
 export const getCurrentLocation = async () => {
   const response = await fetch(
-    `https://geolocation-db.com/json/${process.env.NEXT_PUBLIC_GEO_KEY}`
+    `https://geolocation-db.com/json/${process.env.NEXT_PUBLIC_GEO_KEY}`,
+    {
+      method: 'GET',
+    }
   );
+  // console.log(process.env.NEXT_PUBLIC_GEO_KEY)
   const data = await response.json();
   // console.log(data)
   return {
@@ -90,13 +95,36 @@ export const getCurrentLocation = async () => {
     country_name: data.country_name,
   };
 };
+
+// export async function getGeolocationData() {
+//   try {
+//     // 10th try doing it with ip 
+//     const response = await fetch('https://api.ipify.org?format=json');
+//     const data = await response.json();
+//     console.log(data);
+//     const locationResponse = await fetch(`https://ipapi.co/${data.ip}/json/`);
+//     const locationData = await locationResponse.json();
+//     return {}
+//   } catch (error) {
+//     console.error('Error fetching IP address:', error);
+//     throw error;
+//   }
+// }
+
+// Usage
+// getGeolocationData()
+//   .then((geolocationData) => {
+//     console.log("Geolocation data:", geolocationData);
+//   })
+//   .catch((error) => {
+//     console.error("Error:", error);
+//   });
+
 export const getLocation = async (cityName: string) => {
   const url = `https://api.opencagedata.com/geocode/v1/json?q=${cityName}&key=${process.env.NEXT_PUBLIC_OPENCAGE_KEY}`;
   const response = await fetch(url);
   const data = await response.json();
   const firstResult = data.results[0];
-  // console.log("in Get location");
-  // console.log(firstResult);
   return {
     country_name: firstResult.components.country,
     state: firstResult.components.state,
@@ -148,5 +176,7 @@ export const getWeatherData = async (address: string) => {
     const { main, weather } = await response.json();
     // console.log(main, weather);
     return { main, weather };
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
