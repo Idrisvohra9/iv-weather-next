@@ -3,24 +3,9 @@ import Search from './Search';
 import Link from 'next/link';
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
+import { allWarnings, topCities } from '../api/Data';
 export default function NavBar() {
-    const cityNames = [
-        "New York",
-        "London",
-        "Tokyo",
-        "Paris",
-        "Sydney",
-        "Berlin",
-        "Ahmedabad",
-        "Mumbai",
-        "Delhi"
-    ];
-    const warnings = [
-        "Flood",
-        "Hurricane",
-        "Tornado",
-        "Thunderstorm"
-    ];
+
     return (
         <nav className="bg-blue-300/75 z-10 fixed w-screen">
             <div className="max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -82,7 +67,7 @@ export default function NavBar() {
                                                 Top Searches
                                             </div>
                                             {
-                                                cityNames.map((city, i) =>
+                                                topCities.map((city, i) =>
                                                     <Menu.Item
                                                         key={i}
                                                     >
@@ -121,7 +106,7 @@ export default function NavBar() {
                                     >
                                         <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-700 text-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                             {
-                                                warnings.map((warning, i) =>
+                                                allWarnings.map((warning, i) =>
                                                     <Menu.Item
                                                         key={i}
                                                     >
@@ -174,7 +159,7 @@ export default function NavBar() {
                                     Top Searches
                                 </div>
                                 {
-                                    cityNames.map((city, i) =>
+                                    topCities.map((city, i) =>
                                         <Menu.Item
                                             key={i}
                                         >
@@ -211,7 +196,7 @@ export default function NavBar() {
                         >
                             <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-700 text-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 {
-                                    warnings.map((warning, i) => (
+                                    allWarnings.map((warning, i) => (
                                         <Menu.Item
                                             key={i}
                                         >

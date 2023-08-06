@@ -1,6 +1,7 @@
 "use client"
 import Link from 'next/link';
 import React, { useState, ChangeEvent } from 'react';
+import { allCityNames } from '../api/Data';
 
 interface Props {
   setLocation?: (newLocation: string) => void
@@ -8,117 +9,14 @@ interface Props {
 const SearchComponent: React.FC<Props> = ({ setLocation }) => {
   const [searchResults, setSearchResults] = useState<string[]>([]);
   const [showList, setShowList] = useState(true);
-  // Dummy search suggestions (replace with your real search data)
-  const cityNames = [
-    "New York",
-    "London",
-    "Tokyo",
-    "Paris",
-    "Sydney",
-    "Berlin",
-    "Rome",
-    "Beijing",
-    "Cairo",
-    "Moscow",
-    "Delhi",
-    "Rio de Janeiro",
-    "Toronto",
-    "Amsterdam",
-    "Bangkok",
-    "Dubai",
-    "Singapore",
-    "Istanbul",
-    "Los Angeles",
-    "Chicago",
-    "Mumbai",
-    "Madrid",
-    "Seoul",
-    "Barcelona",
-    "Vienna",
-    "Athens",
-    "Stockholm",
-    "Buenos Aires",
-    "Lisbon",
-    "Prague",
-    "Helsinki",
-    "Oslo",
-    "Copenhagen",
-    "Warsaw",
-    "Brussels",
-    "Zurich",
-    "Geneva",
-    "Venice",
-    "Florence",
-    "Munich",
-    "Sao Paulo",
-    "Rio de Janeiro",
-    "Johannesburg",
-    "Cape Town",
-    "Melbourne",
-    "Auckland",
-    "Wellington",
-    "Vancouver",
-    "Montreal",
-    "Edinburgh",
-    "Glasgow",
-    "Budapest",
-    "Krakow",
-    "St. Petersburg",
-    "Havana",
-    "San Francisco",
-    "Seattle",
-    "Miami",
-    "Houston",
-    "Dallas",
-    "Denver",
-    "Phoenix",
-    "Las Vegas",
-    "Honolulu",
-    "Edinburgh",
-    "Cork",
-    "Belfast",
-    "Cardiff",
-    "Manchester",
-    "Birmingham",
-    "Leeds",
-    "Liverpool",
-    "Newcastle",
-    "Bristol",
-    "Sheffield",
-    "Leicester",
-    "Nottingham",
-    "Southampton",
-    "Glasgow",
-    "Antwerp",
-    "Bruges",
-    "Ghent",
-    "Brussels",
-    "Hamburg",
-    "Munich",
-    "Frankfurt",
-    "Cologne",
-    "Dresden",
-    "Berlin",
-    "Athens",
-    "Thessaloniki",
-    "Heraklion",
-    "Patras",
-    "Milan",
-    "Rome",
-    "Naples",
-    "Turin",
-    "Venice",
-    "Florence",
-    "Pisa",
-    "Genoa",
-  ];
+
 
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
 
     // Filter search suggestions based on input value
-    const filteredResults = cityNames.filter(suggestion =>
+    const filteredResults = allCityNames.filter(suggestion =>
       suggestion.toLowerCase().includes(value.toLowerCase())
     );
 

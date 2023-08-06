@@ -43,44 +43,49 @@ export const getLocation = async (cityName: string) => {
   return {
     country_name: firstResult.components.country,
     state: firstResult.components.state,
-    timezone: firstResult.annotations.timezone
+    timezone: firstResult.annotations.timezone,
   };
 };
 
-export async function getWeatherWarning(state: string, warning: string) {
-  const apiKey = "YOUR_NWS_API_KEY";
-  const location = "New York"; // Replace 'New York' with the desired location
+export async function getWeatherWarning(location: string, alertType: string) {
+  const apiKey = process.env.NEXT_PUBLIC_ACCUWEATHER_KEY;
+  let returnData: any | null;
+  try {
+    const response = await fetch(
+      `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${apiKey}&q=${location}`
+    );
+    const data = await response.json();
 
-  // Fetch flood warnings
-  fetch(
-    `https://api.weather.gov/alerts/active?point=${encodeURIComponent(
-      location
-    )}`,
-    {
-      headers: {
-        "User-Agent": "your-app-name", // Provide a user-agent header for identification (replace 'your-app-name' with your app's name)
-        Accept: "application/geo+json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-    }
-  )
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+    if (data.length > 0) {
+      const locationKey = data[1].Key;
+      if (locationKey) {
+        try {
+          const response = await fetch(
+            `http://dataservice.accuweather.com/alarms/v1/1day/${locationKey}?apikey=${apiKey}`
+          );
+          const data = await response.json();
+          const internal = data[0].Alarms[0];
+          // console.log(internal);
+          const alarmType = internal.AlarmType;
+          if (alarmType === alertType) {
+            // console.log("similar");
+            returnData = {
+              date: data[0].Date,
+              severity: internal.Value.Imperial.Value,
+            };
+          }
+        } catch (error) {
+          console.error("Error fetching weather alerts:", error);
+        }
       }
-      return response.json();
-    })
-    .then((data) => {
-      // Process the data containing flood warnings
-      const floodWarnings = data.features.filter(
-        (feature: { properties: { event: string } }) =>
-          feature.properties.event === "Flood Warning"
-      );
-      console.log(floodWarnings);
-    })
-    .catch((error) => {
-      console.error("Error fetching flood warnings:", error);
-    });
+    } else {
+      console.log("Location not found.");
+    }
+  } catch (error) {
+    console.error("Error fetching location data:", error);
+  } finally {
+    return returnData;
+  }
 }
 
 export const getWeatherData = async (address: string) => {
