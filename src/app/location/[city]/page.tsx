@@ -1,7 +1,6 @@
-import React from 'react'
+import { getLocation, getTimeFromTimeZone, getWeatherData } from "../../api/methods";
 import InnerComponent from "../../components/InnerComponent";
 import OuterComponent from "../../components/OuterComponent";
-import { getLocalTimeData, getWeatherData, getLocation, getTimeFromTimeZone } from "../../api/methods"
 export function generateMetadata({ params }: { params: { city: string } }) {
     return {
         title: `Weather in ${clean(params.city)}`

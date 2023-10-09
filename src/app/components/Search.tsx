@@ -1,6 +1,6 @@
 "use client"
 import Link from 'next/link';
-import React, { useState, ChangeEvent } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { allCityNames } from '../api/Data';
 
 interface Props {

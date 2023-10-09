@@ -1,9 +1,9 @@
 "use client"
-import Search from './Search';
+import { Menu, Transition } from '@headlessui/react';
 import Link from 'next/link';
-import { Fragment } from 'react'
-import { Menu, Transition } from '@headlessui/react'
+import { Fragment } from 'react';
 import { allWarnings, topCities } from '../api/Data';
+import Search from './Search';
 export default function NavBar() {
 
     return (

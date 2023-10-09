@@ -1,8 +1,9 @@
+import Image from "next/image";
 import React from "react";
 
-interface HeaderProps {
-  city: string;
-  state: string;
+interface InnerCompProps {
+  city?: string;
+  state?: string;
   currentTime: string;
   date: string;
   subText: string;
@@ -19,7 +20,7 @@ interface HeaderProps {
   country_name: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ city, state, currentTime, date, subText, main, weather, country_name }) => {
+const InnerComp: React.FC<InnerCompProps> = ({ city, state, currentTime, date, subText, main, weather, country_name }) => {
   if (!country_name || !city) {
     return <h1>
       Sorry, The location could not be found, the reason could be untraceable ip address. Or a request for a location that does not exist.
@@ -56,8 +57,7 @@ const Header: React.FC<HeaderProps> = ({ city, state, currentTime, date, subText
             </div>
             <h1 className="city">{state ? state+"," : ""} {city}</h1>
             <p className="weather">{weather?.[0].description}</p>
-
-            <img src={`http://openweathermap.org/img/w/${weather?.[0].icon}.png`} alt="Weather API Icon" />
+            <Image src={`http://openweathermap.org/img/w/${weather?.[0].icon}.png`} alt="Weather API Icon" width={48} height={48} priority />
             <p className="temp">{main?.temp}°</p>
             <div className="minmaxContainer">
               <div className="min">
@@ -76,4 +76,4 @@ const Header: React.FC<HeaderProps> = ({ city, state, currentTime, date, subText
   }
 }
 
-export default Header;
+export default InnerComp;

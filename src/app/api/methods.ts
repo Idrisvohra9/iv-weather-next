@@ -18,23 +18,6 @@ export function getTimeFromTimeZone(timezone: string) {
   };
 }
 
-// export async function get
-export const getCurrentLocation = async () => {
-  const response = await fetch(
-    `https://geolocation-db.com/json/${process.env.NEXT_PUBLIC_GEO_KEY}`,
-    {
-      method: "GET",
-    }
-  );
-  // console.log(process.env.NEXT_PUBLIC_GEO_KEY)
-  const data = await response.json();
-  // console.log(data)
-  return {
-    city: data.city,
-    state: data.state,
-    country_name: data.country_name,
-  };
-};
 export const getLocation = async (cityName: string) => {
   const url = `https://api.opencagedata.com/geocode/v1/json?q=${cityName}&key=${process.env.NEXT_PUBLIC_OPENCAGE_KEY}`;
   const response = await fetch(url);
