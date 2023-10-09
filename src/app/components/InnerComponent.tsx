@@ -57,7 +57,7 @@ const InnerComp: React.FC<InnerCompProps> = ({ city, state, currentTime, date, s
             </div>
             <h1 className="city">{state ? state+"," : ""} {city}</h1>
             <p className="weather">{weather?.[0].description}</p>
-            <Image src={`http://openweathermap.org/img/w/${weather?.[0].icon}.png`} alt="Weather API Icon" width={48} height={48} priority />
+            <Image src={`http://openweathermap.org/img/w/${weather?.[0].icon}.png`} alt="Weather API Icon" width={48} height={48} />
             <p className="temp">{main?.temp}°</p>
             <div className="minmaxContainer">
               <div className="min">

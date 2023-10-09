@@ -21,7 +21,7 @@ export default function CurrentLocation() {
   useEffect(() => {
     if (isGeolocationAvailable && isGeolocationEnabled && coords) {
       fetch(
-        `https://api.opencagedata.com/geocode/v1/json?q=${coords.latitude}+${coords.longitude}&key=75cc450279e84f71a0b774129c926776`
+        `https://api.opencagedata.com/geocode/v1/json?q=${coords.latitude}+${coords.longitude}&key=${process.env.NEXT_PUBLIC_OPENCAGE_KEY}`
       )
         .then((response) => response.json()) // Parse the response as JSON
         .then((data) => {
@@ -78,7 +78,7 @@ export default function CurrentLocation() {
           <h1 className="city">{location.state ? location.state + "," : ""} {location.city}</h1>
           <p className="weather">{weather?.weather?.[0].description}</p>
 
-          <Image src={`http://openweathermap.org/img/w/${weather?.weather?.[0].icon}.png`} alt="Weather API Icon" width={48} height={48} priority />
+          <Image src={`http://openweathermap.org/img/w/${weather?.weather?.[0].icon}.png`} alt="Weather API Icon" width={48} height={48}/>
           <p className="temp">{weather?.main?.temp}°</p>
           <div className="minmaxContainer">
             <div className="min">
