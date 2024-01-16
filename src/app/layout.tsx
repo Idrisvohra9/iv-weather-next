@@ -8,9 +8,9 @@ const inter = Inter({ subsets: ['latin'] })
 // }
 export function generateMetadata() {
   return {
-      title: `Weather App - IV`,
-      keywords: ['Weather app', "Location", "Idris", "Idris Vohra", "Weather in my city","Todays weather","Weather warnings","Weather right now"],
-      description:"Weather app for full weather forecast and weather warning reports. Made with NextJs, Tailwind css, TypeScript. Made by Idris Vohra."
+    title: `Weather App - IV`,
+    keywords: ['Weather app', "Location", "Idris", "Idris Vohra", "Weather in my city", "Todays weather", "Weather warnings", "Weather right now"],
+    description: "Weather app for full weather forecast and weather warning reports. Made with NextJs, Tailwind css, TypeScript. Made by Idris Vohra."
   }
 }
 
@@ -20,11 +20,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  
+
   return (
     <html lang="en">
       <body className={`${inter.className} dark`}>
-        <NavBar/>
+        <NavBar />
         {children}
         <div className="relative isolate overflow-hidden bg-blue-900 py-16 sm:py-24 lg:py-32">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">

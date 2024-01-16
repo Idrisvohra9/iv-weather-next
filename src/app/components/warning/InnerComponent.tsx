@@ -27,7 +27,7 @@ const InnerComponent: React.FC<Props> = ({ warning, alertData, location }) => {
         return (
             <div className="flex justify-center items-center flex-col">
                 <div className="mb-8 flex justify-center items-center">
-                    <h1 className="flex items-center">Select <Menu as="div" className="relative ml-3">
+                    <h1 className="flex items-center text-lime-100">Select <Menu as="div" className="relative ml-3">
                         <Menu.Button className="flex">
                             <span className="sr-only">Open Locations Dropdown</span>
                             Location
@@ -72,7 +72,7 @@ const InnerComponent: React.FC<Props> = ({ warning, alertData, location }) => {
                     </Menu></h1>
 
                 </div>
-                <div className="container-warning">
+                <div className="container-warning text-lime-100">
                     <div className="box">
                         {
                             alertData === undefined ? (
